@@ -29,6 +29,7 @@ class PlayerSchema(BaseModel):
     total_refund: int
     total_transactions: int
     last_purchase: str
+    active_campaigns: list[str]
     devices: List[DeviceSchema]
     level: int
     xp: int

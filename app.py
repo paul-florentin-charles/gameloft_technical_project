@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timezone
 from typing import Any
 
@@ -36,11 +37,7 @@ def get_db():
         db.close()
 
 
-def get_player_profile(db: Session, player_id: str) -> dict:
-    player = db.get(Player, player_id)
-    if not player:
-        return {}
-
+def get_player_profile(player: Player) -> dict:
     # Assemble player dict from normalized tables
     profile = {
         "player_id": player.player_id,
@@ -164,19 +161,24 @@ def profile_matches_campaign(profile: dict[str, Any], campaign: dict[str, Any]) 
 
 @app.get("/get_client_config/{player_id}")
 def get_client_config(player_id: str, db: Session = Depends(get_db)):
-    profile = get_player_profile(db, player_id)
-    if not profile:
+    player = db.get(Player, player_id)
+    if not player:
         raise HTTPException(status_code=404, detail="Player not found")
+
+    profile = get_player_profile(player)
 
     active_campaigns: list[str] = []
     for campaign in get_current_campaigns(db):
         if profile_matches_campaign(profile, campaign):
             active_campaigns.append(campaign["name"])
 
-    updated_profile = profile.copy()
-    updated_profile["active_campaigns"] = active_campaigns
+    profile["active_campaigns"] = active_campaigns
 
-    return updated_profile
+    # We override previously computed active_campaigns because they could be disabled since then
+    player.active_campaigns = json.dumps(active_campaigns)
+    db.commit()
+
+    return profile
 
 
 @app.post("/create_mock_data")
@@ -209,6 +211,7 @@ def create_mock_data(db: Session = Depends(get_db)):
         total_refund=0,
         total_transactions=5,
         last_purchase="2021-01-22 13:37:17Z",
+        active_campaigns=[],
         devices=[
             DeviceSchema(model="apple iphone 11", carrier="vodafone", firmware="123")
         ],

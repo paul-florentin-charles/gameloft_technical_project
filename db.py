@@ -94,6 +94,7 @@ class Player(Base):
     total_refund = Column(Integer)
     total_transactions = Column(Integer)
     last_purchase = Column(String)
+    active_campaigns = Column(String, default="[]")  # Stored as JSON string
     level = Column(Integer)
     xp = Column(Integer)
     total_playtime = Column(Integer)

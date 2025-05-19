@@ -22,7 +22,7 @@ _DB_ is saved locally in `profile_matcher.db`, if you modify models you need to 
 
 2. **Start the API server:**
    ```bash
-   uvicorn main:app --reload
+   uvicorn app:app --reload
    ```
    
 3. **Open the Swagger UI:** http://localhost:8000/docs
@@ -35,3 +35,4 @@ _DB_ is saved locally in `profile_matcher.db`, if you modify models you need to 
 - Set up **Alembic** for database migrations
 - Set up pipelines with **GitHub Actions** for linting, type checking, code coverage, etc.
 - Set up **PostgreSQL** instead of **SQLite**
+- Use `uv` tool to manage dependencies
