@@ -30,9 +30,16 @@ _DB_ is saved locally in `profile_matcher.db`, if you modify models you need to 
    2. **Test the endpoint:** GET _get_client_config/{**player_id**}_
       1. Use this _player_id_: **97983be2-98b7-11e7-90cf-082e5f28d836**
 
+## Run tests
+
+```bash
+pip install pytest
+pytest tests
+```
+
 ## Improvements
 
 - Set up **Alembic** for database migrations
-- Set up more pipelines with **GitHub Actions** for linting, type checking, code coverage, etc.
+- Set up pipelines with **GitHub Actions** for linting, type checking, code coverage, etc.
 - Set up **PostgreSQL** instead of **SQLite**
 - Use `uv` tool to manage dependencies
