@@ -8,11 +8,12 @@ from sqlalchemy import (
     Table,
     create_engine,
 )
-from sqlalchemy.orm import relationship, sessionmaker, DeclarativeBase
+from sqlalchemy.orm import DeclarativeBase, relationship, sessionmaker
 
 DATABASE_URL = "sqlite:///./profile_matcher.db"
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 
 class Base(DeclarativeBase):
     pass

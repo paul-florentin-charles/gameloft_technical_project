@@ -4,6 +4,8 @@ Simple service to match and update player profile with active campaigns.
 
 _API_ is built with **FastAPI** and _DB_ is run with **SQLite** mapped with **SQLAlchemy**.
 
+_DB_ is saved locally in `profile_matcher.db`, if you modify models you need to stop server, erase file and run it again.
+
 ## Features
 
 - Mock campaign and player data into an **SQLite** _DB_
@@ -24,12 +26,9 @@ _API_ is built with **FastAPI** and _DB_ is run with **SQLite** mapped with **SQ
    ```
    
 3. **Open the Swagger UI:** http://localhost:8000/docs
-   1. **Seed the database with demo data:** POST _create_mock_data_
+   1. **Fill database with mock data:** POST _create_mock_data_
    2. **Test the endpoint:** GET _get_client_config/{**player_id**}_
-
-## Use this _player_id_
-
-- 97983be2-98b7-11e7-90cf-082e5f28d836
+      1. Use this _player_id_: **97983be2-98b7-11e7-90cf-082e5f28d836**
 
 ## Improvements
 
