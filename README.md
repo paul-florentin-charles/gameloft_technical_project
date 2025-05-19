@@ -33,6 +33,6 @@ _DB_ is saved locally in `profile_matcher.db`, if you modify models you need to 
 ## Improvements
 
 - Set up **Alembic** for database migrations
-- Set up pipelines with **GitHub Actions** for linting, type checking, code coverage, etc.
+- Set up more pipelines with **GitHub Actions** for linting, type checking, code coverage, etc.
 - Set up **PostgreSQL** instead of **SQLite**
 - Use `uv` tool to manage dependencies
